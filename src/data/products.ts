@@ -10,6 +10,8 @@ export interface Product {
   /** The colour of its logo, and a pale one to lay under it. */
   color: string;
   pale: string;
+  /** A darker one for text, where its colour reads under 4.5:1 on white or on its pale one. */
+  text?: string;
   /** The same two for a dark page. */
   colorDark: string;
   paleDark: string;
@@ -92,6 +94,7 @@ export const PRODUCTS: Product[] = [
     id: 'rebosheets',
     name: 'Rebosheets',
     color: '#0e7c52',
+    text: '#0b6b47',
     pale: '#e7f3ea',
     colorDark: '#93d4a2',
     paleDark: '#1b3322',
@@ -123,6 +126,7 @@ export const PRODUCTS: Product[] = [
     id: 'rebofiles',
     name: 'ReboFiles',
     color: '#c2410c',
+    text: '#b23c0b',
     pale: '#fdeee2',
     colorDark: '#fb923c',
     paleDark: '#3b2216',
@@ -155,6 +159,7 @@ export const PRODUCTS: Product[] = [
     id: 'rebomail',
     name: 'Rebomail',
     color: '#0d9488',
+    text: '#0b6f68',
     pale: '#ddf3f0',
     colorDark: '#5eead4',
     paleDark: '#12312e',

@@ -10,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = COPY[lang];
 const byId = Object.fromEntries(PRODUCTS.map((p) => [p.id, p]));
-const colours = (p: Product) => `--c:${p.color};--p:${p.pale};--cd:${p.colorDark};--pd:${p.paleDark}`;
+const colours = (p: Product) => `--c:${p.color};--p:${p.pale};--cd:${p.colorDark};--pd:${p.paleDark}${p.text ? `;--t:${p.text}` : ''}`;
 const formatsOf = (p: Product) => (typeof p.formats === 'string' ? p.formats : p.formats[lang]);
 const install = (p: Product) => (p.npm ? `npm install ${p.npm.name}` : '');
 const FORMATS = ['DOCX', 'XLSX', 'PPTX', 'PDF', 'CSV', 'Markdown', 'HTML'];
@@ -64,13 +64,17 @@ const ICONS: Record<string, string> = {
         </div>
       </div>
 
-      <div class="hero-art" aria-hidden="true">
-        <div class="window">
+      <!-- The six apps, one after another in front; all of it is said again below, so it is not read out. -->
+      <div class="hero-art" aria-hidden="true" data-hero>
+        <div class="blobs">
+          {PRODUCTS.map((p, i) => <span data-product style={`${colours(p)};--i:${i}`} />)}
+        </div>
+        <div class="window" data-tilt>
           <div class="window-bar"><i></i><i></i><i></i></div>
           <div class="tiles">
             {
               PRODUCTS.map((p, i) => (
-                <div class="tile" data-product style={`${colours(p)};--i:${i}`}>
+                <div class:list={['tile', { on: i === 0 }]} data-product data-tile style={`${colours(p)};--i:${i}`}>
                   <img src={`/logos/${p.id}.svg`} alt="" width="40" height="40" />
                   <strong>{p.name}</strong>
                   <span>{p.kind[lang]}</span>
@@ -78,11 +82,20 @@ const ICONS: Record<string, string> = {
               ))
             }
           </div>
+          <div class="captions">
+            {
+              PRODUCTS.map((p, i) => (
+                <p class:list={['caption', { on: i === 0 }]} data-product data-caption style={colours(p)}>
+                  <b>{p.name}</b> {p.tagline[lang]}
+                </p>
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="wrap strip">
+    <div class="wrap strip" data-reveal>
       <span>{t.strip}</span>
       <ul>{FORMATS.map((f) => <li>{f}</li>)}</ul>
     </div>
@@ -91,7 +104,7 @@ const ICONS: Record<string, string> = {
   <!-- Products -->
   <section class="section" id="productos">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">{t.products.eyebrow}</span>
         <h2>{t.products.title}</h2>
         <p>{t.products.lead}</p>
@@ -99,8 +112,8 @@ const ICONS: Record<string, string> = {
 
       <div class="products">
         {
-          PRODUCTS.map((p) => (
-            <article class="product" data-product style={colours(p)} id={p.id}>
+          PRODUCTS.map((p, i) => (
+            <article class="product" data-product data-reveal data-spot style={`${colours(p)};--d:${i % 3}`} id={p.id}>
               <header class="product-head">
                 <img src={`/logos/${p.id}.svg`} alt="" width="44" height="44" />
                 <div>
@@ -144,7 +157,7 @@ const ICONS: Record<string, string> = {
   <!-- Together -->
   <section class="section section-tint" id="juntos">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">{t.together.eyebrow}</span>
         <h2>{t.together.title}</h2>
         <p>{t.together.lead}</p>
@@ -152,10 +165,10 @@ const ICONS: Record<string, string> = {
 
       <div class="links">
         {
-          t.together.links.map((link) => {
+          t.together.links.map((link, i) => {
             const to = byId[link.to];
             return (
-              <div class="link" data-product style={colours(to)}>
+              <div class="link" data-product data-reveal style={`${colours(to)};--d:${i}`}>
                 <div class="link-flow" aria-hidden="true">
                   <div class="link-from">
                     {link.from.map((id) => (
@@ -163,7 +176,9 @@ const ICONS: Record<string, string> = {
                     ))}
                   </div>
                   <svg class="link-arrow" viewBox="0 0 48 16" width="48" height="16">
-                    <path d="M2 8h40M36 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    <path class="link-track" d="M2 8h40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path class="link-pulse" d="M2 8h40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                    <path d="M36 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                   <img class="link-to" src={`/logos/${to.id}.svg`} alt="" width="44" height="44" />
                 </div>
@@ -180,13 +195,13 @@ const ICONS: Record<string, string> = {
   <!-- Code -->
   <section class="section" id="codigo">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">{t.code.eyebrow}</span>
         <h2>{t.code.title}</h2>
         <p>{t.code.lead}</p>
       </div>
 
-      <div class="code" data-tabs>
+      <div class="code" data-tabs data-reveal>
         <div class="code-tabs" role="tablist" aria-label={t.code.tablist}>
           {
             PRODUCTS.map((p, i) => (
@@ -219,7 +234,7 @@ const ICONS: Record<string, string> = {
                   <span>{t.products.soon}</span>
                 )}
               </div>
-              <Code code={p.snippet.code} lang={p.snippet.lang} themes={{ light: 'github-light', dark: 'github-dark' }} defaultColor={false} />
+              <Code code={p.snippet.code} lang={p.snippet.lang} themes={{ light: 'github-light-default', dark: 'github-dark-default' }} defaultColor={false} />
             </div>
           ))
         }
@@ -230,14 +245,14 @@ const ICONS: Record<string, string> = {
   <!-- Why -->
   <section class="section section-tint" id="por-que">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">{t.why.eyebrow}</span>
         <h2>{t.why.title}</h2>
       </div>
       <div class="why">
         {
-          t.why.items.map((item) => (
-            <div class="why-item">
+          t.why.items.map((item, i) => (
+            <div class="why-item" data-reveal style={`--d:${i % 3}`}>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONS[item.icon]} />
               <h3>{item.title}</h3>
               <p>{item.text}</p>
@@ -251,7 +266,7 @@ const ICONS: Record<string, string> = {
   <!-- Call to action -->
   <section class="section">
     <div class="wrap">
-      <div class="cta">
+      <div class="cta" data-reveal>
         <div class="cta-logos" aria-hidden="true">
           {PRODUCTS.map((p) => <img src={`/logos/${p.id}.svg`} alt="" width="40" height="40" />)}
         </div>
@@ -320,6 +335,81 @@ const ICONS: Record<string, string> = {
       });
     });
   }
+
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // What comes in as it is scrolled to, once.
+  const reveals = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  if (still || !('IntersectionObserver' in window)) reveals.forEach((el) => el.classList.add('in'));
+  else {
+    const seen = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('in');
+          seen.unobserve(entry.target);
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    reveals.forEach((el) => seen.observe(el));
+  }
+
+  // The header lifts off the page once it is scrolled.
+  const top = document.querySelector<HTMLElement>('.top');
+  const lift = () => top?.classList.toggle('lifted', scrollY > 8);
+  addEventListener('scroll', lift, { passive: true });
+  lift();
+
+  // The apps of the hero, one after another in front, with what each is; the one under the pointer stays.
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (hero) {
+    const tiles = [...hero.querySelectorAll<HTMLElement>('[data-tile]')];
+    const captions = [...hero.querySelectorAll<HTMLElement>('[data-caption]')];
+    let current = 0;
+    let held = false;
+    const front = (index: number) => {
+      current = index;
+      tiles.forEach((tile, i) => tile.classList.toggle('on', i === index));
+      captions.forEach((caption, i) => caption.classList.toggle('on', i === index));
+    };
+    tiles.forEach((tile, i) =>
+      tile.addEventListener('pointerenter', () => {
+        held = true;
+        front(i);
+      }),
+    );
+    hero.addEventListener('pointerleave', () => (held = false));
+    if (!still) setInterval(() => !held && !document.hidden && front((current + 1) % tiles.length), 2600);
+
+    // The window leans a little toward the pointer.
+    const tilt = hero.querySelector<HTMLElement>('[data-tilt]');
+    if (tilt && fine && !still) {
+      hero.addEventListener('pointermove', (event) => {
+        const box = hero.getBoundingClientRect();
+        const x = (event.clientX - box.left) / box.width - 0.5;
+        const y = (event.clientY - box.top) / box.height - 0.5;
+        tilt.style.setProperty('--ry', `${(x * 7).toFixed(2)}deg`);
+        tilt.style.setProperty('--rx', `${(-y * 7).toFixed(2)}deg`);
+      });
+      hero.addEventListener('pointerleave', () => {
+        tilt.style.setProperty('--ry', '0deg');
+        tilt.style.setProperty('--rx', '0deg');
+      });
+    }
+  }
+
+  // A light of the app's colour under the pointer, on each product.
+  if (fine) {
+    for (const card of document.querySelectorAll<HTMLElement>('[data-spot]')) {
+      card.addEventListener('pointermove', (event) => {
+        const box = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${event.clientX - box.left}px`);
+        card.style.setProperty('--my', `${event.clientY - box.top}px`);
+      });
+    }
+  }
 </script>
 
 <style>
@@ -331,7 +421,14 @@ const ICONS: Record<string, string> = {
     background: color-mix(in srgb, var(--bg) 82%, transparent);
     backdrop-filter: saturate(1.4) blur(14px);
     -webkit-backdrop-filter: saturate(1.4) blur(14px);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .top.lifted {
+    border-bottom-color: var(--line);
+    box-shadow: 0 6px 20px -14px rgba(0, 0, 0, 0.25);
   }
   .top-inner {
     display: flex;
@@ -457,12 +554,56 @@ const ICONS: Record<string, string> = {
     color: var(--ink);
   }
 
+  .hero-art {
+    position: relative;
+    perspective: 1200px;
+  }
+  /* Soft lights of the six colours, drifting behind the window. */
+  .blobs {
+    position: absolute;
+    inset: -12% -10%;
+    z-index: 0;
+    filter: blur(48px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .blobs span {
+    position: absolute;
+    width: 42%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--pc);
+    opacity: 0.28;
+    animation: drift 18s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i) * -3s);
+  }
+  .blobs span:nth-child(1) { left: 0; top: 0; }
+  .blobs span:nth-child(2) { left: 30%; top: -6%; }
+  .blobs span:nth-child(3) { right: 0; top: 4%; }
+  .blobs span:nth-child(4) { left: 4%; bottom: 0; }
+  .blobs span:nth-child(5) { left: 34%; bottom: -8%; }
+  .blobs span:nth-child(6) { right: 2%; bottom: 2%; }
+  @keyframes drift {
+    to {
+      transform: translate(8%, -10%) scale(1.15);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .blobs {
+      opacity: 0.4;
+    }
+  }
+
   .window {
+    position: relative;
+    z-index: 1;
     border: 1px solid var(--line);
     border-radius: 22px;
     background: var(--card);
     box-shadow: var(--shadow-lift);
     overflow: hidden;
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .window-bar {
     display: flex;
@@ -489,14 +630,76 @@ const ICONS: Record<string, string> = {
     gap: 4px;
     padding: 18px 16px;
     border-radius: 16px;
+    border: 1px solid transparent;
     background: var(--pp);
     animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
     animation-delay: calc(var(--i) * 70ms + 150ms);
+    transition:
+      transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 0.45s ease,
+      border-color 0.45s ease;
   }
   .tile img {
     margin-bottom: 14px;
     border-radius: 10px;
     box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--pc) 60%, transparent);
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  /* The app in front. */
+  .tile.on {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--pc) 45%, transparent);
+    box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--pc) 70%, transparent);
+  }
+  .tile.on img {
+    transform: scale(1.08) rotate(-4deg);
+  }
+
+  /* What the app in front is, one line under the tiles. */
+  .captions {
+    position: relative;
+    height: 56px;
+    margin: 0 22px 20px;
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+  .caption b {
+    color: var(--pk);
+  }
+  .caption.on {
+    opacity: 1;
+    transform: none;
+  }
+  @media (max-width: 560px) {
+    .captions {
+      height: 72px;
+      margin: 0 16px 16px;
+    }
+    .caption {
+      display: block;
+      padding: 14px;
+      line-height: 1.4;
+      white-space: normal;
+    }
   }
   .tile strong {
     font-size: 15px;
@@ -604,6 +807,31 @@ const ICONS: Record<string, string> = {
   .product:hover::before {
     opacity: 1;
   }
+  /* A light of its colour under the pointer, behind what the card says. */
+  .product::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--pc) 9%, transparent), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .product:hover::after {
+    opacity: 1;
+  }
+  .product > * {
+    position: relative;
+    z-index: 1;
+  }
+  .product-head img {
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .product:hover .product-head img {
+    transform: scale(1.06) rotate(-4deg);
+  }
   .product-head {
     display: flex;
     align-items: center;
@@ -621,7 +849,7 @@ const ICONS: Record<string, string> = {
     padding: 1px 9px;
     border-radius: 999px;
     background: var(--pp);
-    color: var(--pc);
+    color: var(--pk);
     font-size: 12.5px;
     font-weight: 600;
   }
@@ -683,7 +911,7 @@ const ICONS: Record<string, string> = {
     font-size: 12.5px;
   }
   .badge b {
-    color: var(--pc);
+    color: var(--pk);
     font-weight: 600;
   }
   a.badge:hover {
@@ -693,7 +921,7 @@ const ICONS: Record<string, string> = {
     font-family: var(--font);
     background: var(--pp);
     border-color: transparent;
-    color: var(--pc);
+    color: var(--pk);
     font-weight: 600;
   }
   .product-links {
@@ -707,7 +935,7 @@ const ICONS: Record<string, string> = {
     text-decoration: none;
   }
   .product-links a:hover {
-    color: var(--pc);
+    color: var(--pk);
   }
   @media (max-width: 1000px) {
     .products {
@@ -762,6 +990,40 @@ const ICONS: Record<string, string> = {
     flex: 1;
     min-width: 32px;
     color: var(--pc);
+  }
+  /* What one app gives the other, running along the arrow. */
+  .link-track {
+    opacity: 0.3;
+  }
+  .link-pulse {
+    stroke-dasharray: 12 60;
+    stroke-dashoffset: 72;
+    animation: flow 1.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+  @keyframes flow {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .link-to {
+    animation: take 1.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+  @keyframes take {
+    0%,
+    60% {
+      transform: none;
+    }
+    80% {
+      transform: scale(1.08);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .link-pulse {
+      display: none;
+    }
+    .link-track {
+      opacity: 1;
+    }
   }
   .link-to {
     border-radius: 11px;

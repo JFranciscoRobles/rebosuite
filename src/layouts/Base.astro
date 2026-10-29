@@ -23,6 +23,8 @@ const en = new URL('/en/', Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Before the page is drawn: what comes in on scrolling starts hidden only where a script will bring it. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="es" href={es} />
     <link rel="alternate" hreflang="en" href={en} />
