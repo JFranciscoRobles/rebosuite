@@ -1,0 +1,42 @@
+---
+// The page of one demo, shown in a frame of the landing: the app alone in a document of its own.
+import { PRODUCTS } from '../../data/products';
+import DemoPage from '../../demos/DemoPage';
+import '../../styles/global.css';
+
+export function getStaticPaths() {
+  return PRODUCTS.filter((p) => p.npm).map((p) => ({ params: { app: p.id }, props: { name: p.name } }));
+}
+
+const { app } = Astro.params;
+const { name } = Astro.props;
+// Its pale colour, under the loading state.
+const product = PRODUCTS.find((p) => p.id === app)!;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex" />
+    <title>{name} · Demo</title>
+    <link rel="icon" href={`/logos/${app}.svg`} type="image/svg+xml" />
+    <style is:global>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        background: var(--bg);
+      }
+    </style>
+  </head>
+  <body data-product style={`--c:${product.color};--p:${product.pale};--cd:${product.colorDark};--pd:${product.paleDark}`}>
+    <DemoPage client:only="react" app={app} name={name} />
+  </body>
+</html>

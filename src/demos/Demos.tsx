@@ -1,17 +1,11 @@
-// One demo of each app, to use right here. Each is loaded only once its tab
-// is chosen and the section is in view, so the page stays light; ReboNotes,
-// not on npm yet, says so in its place.
+// One demo of each app, to use right here. Each is a frame of its own page
+// (/demos/<app>/), so the styles and keys of one app never reach another;
+// it is loaded only once its tab is chosen and the section is in view, and
+// those opened stay as they were. ReboNotes, not on npm yet, says so.
 
-import { Component, type ComponentType, type ReactNode, Suspense, lazy, useEffect, useRef, useState } from 'react';
-import type { DemoProps } from './shared';
+import { useEffect, useRef, useState } from 'react';
 
-const DEMOS: Record<string, ComponentType<DemoProps>> = {
-  rebodocs: lazy(() => import('./DocsDemo')),
-  reboslides: lazy(() => import('./SlidesDemo')),
-  rebosheets: lazy(() => import('./SheetsDemo')),
-  rebofiles: lazy(() => import('./FilesDemo')),
-  rebomail: lazy(() => import('./MailDemo')),
-};
+const DEMOS = new Set(['rebodocs', 'reboslides', 'rebosheets', 'rebofiles', 'rebomail']);
 
 export interface DemoApp {
   id: string;
@@ -29,16 +23,6 @@ interface Props {
 /** The colours of an app, as the page gives them in a `style` attribute. */
 const styleOf = (style: string) => Object.fromEntries(style.split(';').map((pair) => pair.split(':') as [string, string]));
 
-class Fallback extends Component<{ message: string; children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    return this.state.failed ? <div className="demo-state">{this.props.message}</div> : this.props.children;
-  }
-}
-
 export default function Demos({ lang, apps, texts }: Props) {
   const root = useRef<HTMLDivElement>(null);
   const [current, setCurrent] = useState(apps[0].id);
@@ -46,7 +30,7 @@ export default function Demos({ lang, apps, texts }: Props) {
   // Every demo opened stays, out of sight, so what was done in one is there on coming back; its run starts it over.
   const [opened, setOpened] = useState<string[]>([apps[0].id]);
   const [runs, setRuns] = useState<Record<string, number>>({});
-  const [dark, setDark] = useState(false);
+  const [loaded, setLoaded] = useState<Record<string, boolean>>({});
 
   // Loaded once the section is near.
   useEffect(() => {
@@ -57,24 +41,20 @@ export default function Demos({ lang, apps, texts }: Props) {
     return () => near.disconnect();
   }, []);
 
-  // In the theme the page is in.
-  useEffect(() => {
-    const scheme = matchMedia('(prefers-color-scheme: dark)');
-    const follow = () => setDark(scheme.matches);
-    follow();
-    scheme.addEventListener('change', follow);
-    return () => scheme.removeEventListener('change', follow);
-  }, []);
-
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const choose = (index: number, focus: boolean) => {
-    const app = apps[(index + apps.length) % apps.length];
+    const at = (index + apps.length) % apps.length;
+    const app = apps[at];
     setCurrent(app.id);
-    if (DEMOS[app.id]) setOpened((ids) => (ids.includes(app.id) ? ids : [...ids, app.id]));
-    if (focus) tabs.current[(index + apps.length) % apps.length]?.focus();
+    if (DEMOS.has(app.id)) setOpened((ids) => (ids.includes(app.id) ? ids : [...ids, app.id]));
+    if (focus) tabs.current[at]?.focus();
+  };
+  const restart = () => {
+    setLoaded((all) => ({ ...all, [current]: false }));
+    setRuns((all) => ({ ...all, [current]: (all[current] ?? 0) + 1 }));
   };
   const app = apps.find((a) => a.id === current)!;
-  const Demo = DEMOS[current];
+  const live = DEMOS.has(current);
 
   return (
     <div className="demo" ref={root}>
@@ -107,8 +87,8 @@ export default function Demos({ lang, apps, texts }: Props) {
             </button>
           ))}
         </div>
-        {Demo && (
-          <button type="button" className="demo-reset" onClick={() => setRuns((all) => ({ ...all, [current]: (all[current] ?? 0) + 1 }))}>
+        {live && (
+          <button type="button" className="demo-reset" onClick={restart}>
             <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
               <path d="M2.5 8a5.5 5.5 0 1 0 1.7-4M2.5 2.5v3h3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -120,29 +100,27 @@ export default function Demos({ lang, apps, texts }: Props) {
       <div className="demo-frame" role="tabpanel" id="demo-panel" aria-labelledby={`demo-tab-${current}`} data-product="" style={styleOf(app.style)}>
         {seen &&
           opened.map((id) => {
-            const Opened = DEMOS[id];
             const shown = id === current;
             const name = apps.find((a) => a.id === id)!.name;
             return (
-              <div key={`${id}-${runs[id] ?? 0}`} className={shown ? 'demo-layer' : 'demo-layer demo-away'} inert={!shown}>
-                <Fallback message={texts.failed}>
-                  <Suspense
-                    fallback={
-                      <div className="demo-state">
-                        <img className="demo-pulse" src={`/logos/${id}.svg`} alt="" width={48} height={48} />
-                        {texts.loading.replace('{app}', name)}
-                      </div>
-                    }
-                  >
-                    <div className="demo-app">
-                      <Opened lang={lang} dark={dark} />
-                    </div>
-                  </Suspense>
-                </Fallback>
-              </div>
+              <iframe
+                key={`${id}-${runs[id] ?? 0}`}
+                className={shown ? 'demo-layer' : 'demo-layer demo-away'}
+                src={`/demos/${id}/?lang=${lang}`}
+                title={`${name} · demo`}
+                tabIndex={shown ? 0 : -1}
+                aria-hidden={!shown}
+                onLoad={() => setLoaded((all) => ({ ...all, [id]: true }))}
+              />
             );
           })}
-        {!Demo && (
+        {live && !loaded[current] && (
+          <div className="demo-state">
+            <img className="demo-pulse" src={`/logos/${app.id}.svg`} alt="" width={48} height={48} />
+            {texts.loading.replace('{app}', app.name)}
+          </div>
+        )}
+        {!live && (
           <div className="demo-state">
             <img src={`/logos/${app.id}.svg`} alt="" width={56} height={56} />
             <strong>{texts.soon}</strong>
