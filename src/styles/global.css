@@ -1,0 +1,226 @@
+/* The warm neutrals of the Rebo suite, and each app's own colour laid on them. */
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #f4f2ee;
+  --card: #ffffff;
+  --ink: #23221f;
+  --ink-soft: #4a4843;
+  --muted: #6b6964;
+  --line: #e8e5df;
+  --line-strong: #d9d5cd;
+  --button: #23221f;
+  --on-button: #ffffff;
+  --shadow: 0 1px 2px rgba(35, 34, 31, 0.04), 0 8px 24px -12px rgba(35, 34, 31, 0.12);
+  --shadow-lift: 0 2px 4px rgba(35, 34, 31, 0.04), 0 24px 48px -20px rgba(35, 34, 31, 0.22);
+  --code-bg: #f7f6f3;
+  --font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --radius: 18px;
+  --width: 1160px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141312;
+    --surface: #1b1a18;
+    --card: #1f1e1c;
+    --ink: #ecebe7;
+    --ink-soft: #d2d0ca;
+    --muted: #a9a69f;
+    --line: #2e2c29;
+    --line-strong: #403d38;
+    --button: #ecebe7;
+    --on-button: #141312;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 48px -20px rgba(0, 0, 0, 0.7);
+    --code-bg: #181715;
+    color-scheme: dark;
+  }
+}
+
+/* An app's colour, from the four it is given on its element. */
+[data-product] {
+  --pc: var(--c);
+  --pp: var(--p);
+}
+@media (prefers-color-scheme: dark) {
+  [data-product] {
+    --pc: var(--cd);
+    --pp: var(--pd);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 16px;
+  }
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--button);
+  color: var(--on-button);
+  border-radius: 999px;
+}
+
+/* --- Buttons ------------------------------------------------------------ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+.button:hover {
+  transform: translateY(-1px);
+}
+.button-primary {
+  background: var(--button);
+  color: var(--on-button);
+}
+.button-ghost {
+  background: var(--card);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+.button-ghost:hover {
+  border-color: var(--ink-soft);
+}
+
+/* --- Sections ------------------------------------------------------------ */
+
+.section {
+  padding: 112px 0;
+}
+@media (max-width: 640px) {
+  .section {
+    padding: 72px 0;
+  }
+}
+.section-head {
+  max-width: 680px;
+  margin-bottom: 48px;
+}
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.section-head h2 {
+  font-size: clamp(32px, 4.4vw, 48px);
+}
+.section-head p {
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+/* --- The code Astro highlights, in both themes -------------------------- */
+
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: transparent !important;
+}
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+}

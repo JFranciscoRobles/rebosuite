@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <title>Rebosheets</title>
+  <rect width="32" height="32" rx="7" fill="#0e7c52"/>
+  <rect x="7.5" y="7.5" width="17" height="17" rx="1.8" fill="#fff"/>
+  <path d="M7.5 13h17M13.2 7.5v17" stroke="#0e7c52" stroke-width="1.6"/>
+</svg>

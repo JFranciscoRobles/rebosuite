@@ -1,0 +1,20 @@
+{
+  "name": "rebosuite",
+  "version": "0.1.0",
+  "description": "The landing page of the Rebo suite: Rebodocs, ReboSlides, Rebosheets, ReboFiles, Rebomail and ReboNotes.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "7.3.8"
+  }
+}
