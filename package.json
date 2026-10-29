@@ -15,6 +15,26 @@
     "check": "astro check"
   },
   "dependencies": {
-    "astro": "7.3.8"
+    "@astrojs/react": "7.0.1",
+    "@rebodocs/core": "0.13.0",
+    "@rebodocs/editor": "0.13.0",
+    "@rebodocs/react": "0.13.0",
+    "@rebodocs/viewer": "0.13.0",
+    "@rebofiles/core": "0.13.0",
+    "@rebofiles/react": "0.13.0",
+    "@rebomail/react": "0.1.0",
+    "@rebosheets/core": "0.1.0",
+    "@rebosheets/react": "0.1.0",
+    "@rebosheets/viewer": "0.1.0",
+    "@reboslides/core": "0.6.0",
+    "@reboslides/react": "0.6.0",
+    "@reboslides/viewer": "0.6.0",
+    "astro": "7.3.8",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
   }
 }

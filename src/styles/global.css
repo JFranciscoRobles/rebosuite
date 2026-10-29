@@ -243,3 +243,151 @@ p {
     color: var(--shiki-dark) !important;
   }
 }
+
+/* --- The demos (drawn by React, so not scoped to the page) -------------- */
+
+.demo {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--card);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+.demo-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.demo-tabs {
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.demo-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  height: 38px;
+  padding: 0 14px 0 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.demo-tabs button img {
+  border-radius: 5px;
+}
+.demo-tabs button:hover {
+  color: var(--ink);
+}
+.demo-tabs button[aria-selected='true'] {
+  background: var(--card);
+  border-color: color-mix(in srgb, var(--pc) 40%, var(--line-strong));
+  color: var(--ink);
+  box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--pc) 60%, transparent);
+}
+.demo-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  margin-left: auto;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.demo-reset:hover {
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+.demo-frame {
+  position: relative;
+  height: min(720px, 80vh);
+  min-height: 520px;
+  background: var(--bg);
+}
+.demo-layer {
+  position: absolute;
+  inset: 0;
+}
+/* A demo opened before, kept as it was, out of sight and out of reach. */
+.demo-away {
+  visibility: hidden;
+  pointer-events: none;
+}
+.demo-app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.demo-app > * {
+  height: 100%;
+}
+.demo-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  color: var(--ink-soft);
+  background: radial-gradient(circle at 50% 40%, var(--pp), transparent 60%);
+}
+.demo-state strong {
+  font-size: 20px;
+  color: var(--ink);
+}
+.demo-state img {
+  border-radius: 12px;
+}
+.demo-pulse {
+  animation: demo-pulse 1.2s ease-in-out infinite;
+}
+@keyframes demo-pulse {
+  50% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+}
+.demo-note {
+  padding: 12px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13.5px;
+}
+@media (max-width: 640px) {
+  .demo-bar {
+    flex-wrap: wrap;
+  }
+  .demo-reset {
+    margin-left: 0;
+  }
+  .demo-frame {
+    height: 76vh;
+    min-height: 480px;
+  }
+}

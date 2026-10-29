@@ -9,7 +9,7 @@ export const COPY = {
     title: 'Rebo — La suite de oficina para tu aplicación',
     description:
       'Documentos, presentaciones, hojas de cálculo, archivos, correos y notas para el navegador, con motores propios. Código abierto, en npm, para React o sin framework.',
-    nav: { products: 'Productos', together: 'Juntos', code: 'Código', why: 'Por qué Rebo' },
+    nav: { products: 'Productos', demo: 'Pruébalas', together: 'Juntos', code: 'Código', why: 'Por qué Rebo' },
     otherLang: { label: 'English', href: '/en/' },
     hero: {
       eyebrow: 'Código abierto · MIT · TypeScript',
@@ -27,6 +27,18 @@ export const COPY = {
       lead: 'Cada una funciona sola, con su paquete y su documentación. Juntas se ven y se comportan como una sola suite, en claro y en oscuro.',
       site: 'Sitio',
       soon: 'Próximamente en npm',
+    },
+    demo: {
+      eyebrow: 'Pruébalas',
+      title: 'Úsalas aquí mismo',
+      lead: 'Cada demo es la app real, cargada desde npm, con un archivo de ejemplo. Escribe, mueve, cambia formatos: nada se guarda ni sale de tu navegador.',
+      tablist: 'Demos por app',
+      loading: 'Cargando {app}…',
+      reset: 'Empezar de nuevo',
+      local: 'Todo ocurre en tu navegador. Al recargar, cada demo vuelve a empezar.',
+      soon: 'ReboNotes llega pronto',
+      soonText: 'Su demo estará aquí en cuanto esté en npm.',
+      failed: 'Esta demo no pudo abrirse en este navegador.',
     },
     together: {
       eyebrow: 'Juntos',
@@ -82,7 +94,7 @@ export const COPY = {
     title: 'Rebo — The office suite for your application',
     description:
       'Documents, presentations, spreadsheets, files, emails and notes for the browser, with engines of their own. Open source, on npm, for React or no framework.',
-    nav: { products: 'Products', together: 'Together', code: 'Code', why: 'Why Rebo' },
+    nav: { products: 'Products', demo: 'Try them', together: 'Together', code: 'Code', why: 'Why Rebo' },
     otherLang: { label: 'Español', href: '/' },
     hero: {
       eyebrow: 'Open source · MIT · TypeScript',
@@ -100,6 +112,18 @@ export const COPY = {
       lead: 'Each works on its own, with its package and its documentation. Together they look and behave as one suite, light and dark.',
       site: 'Website',
       soon: 'Coming to npm',
+    },
+    demo: {
+      eyebrow: 'Try them',
+      title: 'Use them right here',
+      lead: 'Each demo is the real app, loaded from npm, with a sample file. Type, move things, change formats: nothing is saved or leaves your browser.',
+      tablist: 'Demos by app',
+      loading: 'Loading {app}…',
+      reset: 'Start over',
+      local: 'It all happens in your browser. Reload, and each demo starts again.',
+      soon: 'ReboNotes is coming',
+      soonText: 'Its demo will be here as soon as it is on npm.',
+      failed: 'This demo could not open in this browser.',
     },
     together: {
       eyebrow: 'Together',

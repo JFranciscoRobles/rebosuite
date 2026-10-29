@@ -1,6 +1,7 @@
 ---
 import { Code } from 'astro:components';
 import { COPY, GITHUB } from '../data/copy';
+import Demos from '../demos/Demos';
 import { type Lang, PRODUCTS, type Product } from '../data/products';
 
 interface Props {
@@ -36,6 +37,7 @@ const ICONS: Record<string, string> = {
     </a>
     <nav class="nav" aria-label={lang === 'es' ? 'Principal' : 'Main'}>
       <a href="#productos">{t.nav.products}</a>
+      <a href="#demo">{t.nav.demo}</a>
       <a href="#juntos">{t.nav.together}</a>
       <a href="#codigo">{t.nav.code}</a>
       <a href="#por-que">{t.nav.why}</a>
@@ -150,6 +152,20 @@ const ICONS: Record<string, string> = {
             </article>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- Demos -->
+  <section class="section section-demo" id="demo">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">{t.demo.eyebrow}</span>
+        <h2>{t.demo.title}</h2>
+        <p>{t.demo.lead}</p>
+      </div>
+      <div data-reveal>
+        <Demos client:only="react" lang={lang} apps={PRODUCTS.map((p) => ({ id: p.id, name: p.name, kind: p.kind[lang], style: colours(p) }))} texts={t.demo} />
       </div>
     </div>
   </section>

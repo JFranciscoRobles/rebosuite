@@ -18,9 +18,10 @@ npm run preview
 | `src/data/products.ts` | The six apps: their colours, what each says, its features, its package and version on npm, its links and its code example. Taken from each app's README. |
 | `src/data/copy.ts` | What the page says around them, in both languages. |
 | `src/components/Landing.astro` | The page, its styles and its few lines of script (the tabs of code, copying the install command). |
+| `src/demos/` | One demo of each app, in React: the apps from npm with a sample file each (a Word document, a deck, a workbook, a drive kept in memory, an email). `Demos.tsx` loads each only when its tab is chosen and the section is near, and keeps those opened as they were. |
 | `src/layouts/Base.astro` | The document: title, description, the language alternates. |
 | `src/styles/global.css` | The warm neutrals of the suite, and each app's colour in light and dark. |
 | `public/logos/` | Each app's logo, as in its own repository. |
 
 When an app publishes a new version, change its `npm.version` in
-`src/data/products.ts`; when ReboNotes reaches npm, give it `npm` and `repo`.
+`src/data/products.ts`, and its package in `package.json`; when ReboNotes reaches npm, give it `npm` and `repo`, and add its demo to `DEMOS` in `src/demos/Demos.tsx`.
