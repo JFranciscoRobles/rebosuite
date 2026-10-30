@@ -140,7 +140,7 @@ export const PRODUCTS: Product[] = [
       en: ['Forms filled and made', 'Handwritten and digital signatures (PAdES)', 'Pages turned, moved and joined', 'Text recognized, PDF/A and passwords'],
     },
     formats: 'PDF',
-    npm: { name: '@rebopdf/react', version: '0.2.0' },
+    npm: { name: '@rebopdf/react', version: '0.2.1' },
     repo: 'https://github.com/JFranciscoRobles/rebopdf',
     snippet: {
       lang: 'tsx',
