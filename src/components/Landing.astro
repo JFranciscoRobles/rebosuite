@@ -66,7 +66,7 @@ const ICONS: Record<string, string> = {
         </div>
       </div>
 
-      <!-- The six apps, one after another in front; all of it is said again below, so it is not read out. -->
+      <!-- The seven apps, one after another in front; all of it is said again below, so it is not read out. -->
       <div class="hero-art" aria-hidden="true" data-hero>
         <div class="blobs">
           {PRODUCTS.map((p, i) => <span data-product style={`${colours(p)};--i:${i}`} />)}
@@ -574,7 +574,7 @@ const ICONS: Record<string, string> = {
     position: relative;
     perspective: 1200px;
   }
-  /* Soft lights of the six colours, drifting behind the window. */
+  /* Soft lights of the seven colours, drifting behind the window. */
   .blobs {
     position: absolute;
     inset: -12% -10%;
@@ -721,6 +721,24 @@ const ICONS: Record<string, string> = {
     font-size: 15px;
     letter-spacing: -0.01em;
   }
+  /* The last app, alone in its row: the whole row, its logo beside its name. */
+  .tile:last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .tile:last-child:nth-child(3n + 1) img {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0;
+  }
+  .tile:last-child:nth-child(3n + 1) span::before {
+    content: '·';
+    margin-right: 10px;
+    color: var(--muted);
+  }
   .tile span {
     font-size: 13px;
     color: var(--ink-soft);
@@ -776,6 +794,25 @@ const ICONS: Record<string, string> = {
       grid-template-columns: repeat(2, 1fr);
       padding: 16px;
       gap: 10px;
+    }
+    /* Two across, it is the odd one that is alone. */
+    .tile:last-child:nth-child(3n + 1):not(:nth-child(2n + 1)) {
+      grid-column: auto;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 18px 16px;
+    }
+    .tile:last-child:nth-child(3n + 1):not(:nth-child(2n + 1)) img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 14px;
+    }
+    .tile:last-child:nth-child(3n + 1):not(:nth-child(2n + 1)) span::before {
+      content: none;
+    }
+    .tile:last-child:nth-child(2n + 1) {
+      grid-column: 1 / -1;
     }
     .install {
       width: 100%;
@@ -953,9 +990,36 @@ const ICONS: Record<string, string> = {
   .product-links a:hover {
     color: var(--pk);
   }
+  /* The last app, alone in its row of three: the whole row, what it is beside what it has. */
+  @media (min-width: 1001px) {
+    .product:last-child:nth-child(3n + 1) {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+      align-content: start;
+    }
+    .product:last-child:nth-child(3n + 1) > :is(.product-head, .product-tagline, .product-text) {
+      grid-column: 1;
+    }
+    .product:last-child:nth-child(3n + 1) > .product-features {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      align-self: center;
+      margin: 0;
+    }
+    .product:last-child:nth-child(3n + 1) > .product-foot {
+      grid-column: 1 / -1;
+      margin-top: 24px;
+    }
+  }
   @media (max-width: 1000px) {
     .products {
       grid-template-columns: repeat(2, 1fr);
+    }
+    /* Two across, the odd one alone takes the row. */
+    .product:last-child:nth-child(2n + 1) {
+      grid-column: 1 / -1;
     }
   }
   @media (max-width: 660px) {

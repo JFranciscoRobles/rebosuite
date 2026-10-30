@@ -8,6 +8,7 @@ const DEMOS: Record<string, ComponentType<DemoProps>> = {
   rebodocs: lazy(() => import('./DocsDemo')),
   reboslides: lazy(() => import('./SlidesDemo')),
   rebosheets: lazy(() => import('./SheetsDemo')),
+  rebopdf: lazy(() => import('./PdfDemo')),
   rebofiles: lazy(() => import('./FilesDemo')),
   rebomail: lazy(() => import('./MailDemo')),
   rebonotes: lazy(() => import('./NotesDemo')),

@@ -1,7 +1,7 @@
 {
   "name": "rebosuite",
   "version": "0.1.0",
-  "description": "The landing page of the Rebo suite: Rebodocs, ReboSlides, Rebosheets, ReboFiles, Rebomail and ReboNotes.",
+  "description": "The landing page of the Rebo suite: Rebodocs, ReboSlides, Rebosheets, ReboPDF, ReboFiles, Rebomail and ReboNotes.",
   "license": "MIT",
   "private": true,
   "type": "module",
@@ -24,6 +24,8 @@
     "@rebofiles/react": "0.13.0",
     "@rebomail/react": "0.1.0",
     "@rebonotes/react": "0.1.1",
+    "@rebopdf/core": "0.2.0",
+    "@rebopdf/react": "0.2.0",
     "@rebosheets/core": "0.1.0",
     "@rebosheets/react": "0.1.0",
     "@rebosheets/viewer": "0.1.0",
@@ -31,11 +33,15 @@
     "@reboslides/react": "0.7.0",
     "@reboslides/viewer": "0.7.0",
     "astro": "7.3.8",
+    "pdfjs-dist": "6.4.299",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0"
+  },
+  "overrides": {
+    "node-forge": "1.4.2"
   }
 }

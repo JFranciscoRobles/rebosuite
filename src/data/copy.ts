@@ -8,13 +8,13 @@ export const COPY = {
   es: {
     title: 'Rebo — La suite de oficina para tu aplicación',
     description:
-      'Documentos, presentaciones, hojas de cálculo, archivos, correos y notas para el navegador, con motores propios. Código abierto, en npm, para React o sin framework.',
+      'Documentos, presentaciones, hojas de cálculo, PDF, archivos, correos y notas para el navegador, con motores propios. Código abierto, en npm, para React o sin framework.',
     nav: { products: 'Productos', demo: 'Pruébalas', together: 'Juntos', code: 'Código', why: 'Por qué Rebo' },
     otherLang: { label: 'English', href: '/en/' },
     hero: {
       eyebrow: 'Código abierto · MIT · TypeScript',
       title: ['La oficina completa,', 'dentro de tu aplicación.'],
-      lead: 'Seis aplicaciones para el navegador —documentos, presentaciones, hojas de cálculo, archivos, correos y notas— con motores propios. Las instalas desde npm y las pones en tu app como un componente más.',
+      lead: 'Siete aplicaciones para el navegador —documentos, presentaciones, hojas de cálculo, PDF, archivos, correos y notas— con motores propios. Las instalas desde npm y las pones en tu app como un componente más.',
       primary: 'Ver los productos',
       secondary: 'GitHub',
       copied: 'Copiado',
@@ -23,7 +23,7 @@ export const COPY = {
     strip: 'Archivos de verdad, no formatos inventados',
     products: {
       eyebrow: 'Los productos',
-      title: 'Seis apps, un mismo aspecto',
+      title: 'Siete apps, un mismo aspecto',
       lead: 'Cada una funciona sola, con su paquete y su documentación. Juntas se ven y se comportan como una sola suite, en claro y en oscuro.',
       site: 'Sitio',
       soon: 'Próximamente en npm',
@@ -76,8 +76,8 @@ export const COPY = {
         { icon: 'engine', title: 'Motores propios', text: 'No envuelven otra librería: cada app trae su propio modelo, su maquetación y su lector y escritor de archivos.' },
         { icon: 'file', title: 'Archivos de verdad', text: 'DOCX, XLSX, PPTX, PDF, Markdown y el HTML que leen las bandejas de correo. Se abren y se guardan en los formatos de siempre.' },
         { icon: 'server', title: 'En tu infraestructura', text: 'Tus archivos se quedan en tu servidor y en tu almacenamiento. Tú decides quién puede ver y hacer qué.' },
-        { icon: 'people', title: 'En tiempo real', text: 'Varias personas en el mismo documento, presentación u hoja, cada una con su cursor y su propio deshacer.' },
-        { icon: 'spark', title: 'Listas para la IA', text: 'Servidores MCP para que Claude y otros asistentes lean y editen documentos, presentaciones, hojas y archivos.' },
+        { icon: 'people', title: 'En tiempo real', text: 'Varias personas en el mismo documento, presentación, hoja o PDF, cada una con su cursor y su propio deshacer.' },
+        { icon: 'spark', title: 'Listas para la IA', text: 'Servidores MCP para que Claude y otros asistentes lean y editen documentos, presentaciones, hojas, PDF y archivos.' },
         { icon: 'globe', title: 'Español e inglés', text: 'Interfaces en los dos idiomas, tema claro y oscuro, y pensadas para teclado y lectores de pantalla.' },
       ],
     },
@@ -91,13 +91,13 @@ export const COPY = {
   en: {
     title: 'Rebo — The office suite for your application',
     description:
-      'Documents, presentations, spreadsheets, files, emails and notes for the browser, with engines of their own. Open source, on npm, for React or no framework.',
+      'Documents, presentations, spreadsheets, PDFs, files, emails and notes for the browser, with engines of their own. Open source, on npm, for React or no framework.',
     nav: { products: 'Products', demo: 'Try them', together: 'Together', code: 'Code', why: 'Why Rebo' },
     otherLang: { label: 'Español', href: '/' },
     hero: {
       eyebrow: 'Open source · MIT · TypeScript',
       title: ['A whole office suite,', 'inside your application.'],
-      lead: 'Six apps for the browser —documents, presentations, spreadsheets, files, emails and notes— with engines of their own. Install them from npm and put them in your app as one more component.',
+      lead: 'Seven apps for the browser —documents, presentations, spreadsheets, PDFs, files, emails and notes— with engines of their own. Install them from npm and put them in your app as one more component.',
       primary: 'See the products',
       secondary: 'GitHub',
       copied: 'Copied',
@@ -106,7 +106,7 @@ export const COPY = {
     strip: 'Real files, not formats of our own',
     products: {
       eyebrow: 'The products',
-      title: 'Six apps, one look',
+      title: 'Seven apps, one look',
       lead: 'Each works on its own, with its package and its documentation. Together they look and behave as one suite, light and dark.',
       site: 'Website',
       soon: 'Coming to npm',
@@ -159,8 +159,8 @@ export const COPY = {
         { icon: 'engine', title: 'Engines of their own', text: 'They wrap no other library: each app brings its own model, its own layout, and its own file reader and writer.' },
         { icon: 'file', title: 'Real files', text: 'DOCX, XLSX, PPTX, PDF, Markdown, and the HTML inboxes read. Opened and saved in the formats everyone uses.' },
         { icon: 'server', title: 'On your infrastructure', text: 'Your files stay on your server and your storage. You decide who may see and do what.' },
-        { icon: 'people', title: 'Real time', text: 'Several people in the same document, deck or sheet, each with their own cursor and their own undo.' },
-        { icon: 'spark', title: 'Ready for AI', text: 'MCP servers so Claude and other assistants can read and edit documents, decks, sheets and files.' },
+        { icon: 'people', title: 'Real time', text: 'Several people in the same document, deck, sheet or PDF, each with their own cursor and their own undo.' },
+        { icon: 'spark', title: 'Ready for AI', text: 'MCP servers so Claude and other assistants can read and edit documents, decks, sheets, PDFs and files.' },
         { icon: 'globe', title: 'English and Spanish', text: 'Interfaces in both languages, light and dark themes, and made for the keyboard and screen readers.' },
       ],
     },

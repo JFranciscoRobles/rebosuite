@@ -1,4 +1,4 @@
-// The six apps of the suite, as the page shows them, in both languages. What
+// The seven apps of the suite, as the page shows them, in both languages. What
 // each says is taken from its own README: change it there first.
 
 export type Lang = 'es' | 'en';
@@ -119,6 +119,38 @@ export const PRODUCTS: Product[] = [
   xlsx={file}
   name="budget.xlsx"
   onSave={(xlsx) => upload(xlsx)}
+/>`,
+    },
+  },
+  {
+    id: 'rebopdf',
+    name: 'ReboPDF',
+    color: '#b42318',
+    pale: '#fdecea',
+    colorDark: '#f97066',
+    paleDark: '#3d1d1a',
+    kind: { es: 'PDF', en: 'PDFs' },
+    tagline: { es: 'PDF en el navegador: llenarlos, firmarlos y editarlos.', en: 'PDFs in the browser: filled, signed and edited.' },
+    description: {
+      es: 'Lee, busca, llena formularios, resalta, anota y firma PDF, y gira, mueve, une y saca sus páginas. Se guarda como un PDF que abre cualquier lector: el formulario sigue siendo formulario y las notas, anotaciones.',
+      en: 'Read, search, fill forms, highlight, note and sign PDFs, and turn, move, join and take out their pages. Saved as a PDF any reader opens: the form stays a form, and the notes stay annotations.',
+    },
+    features: {
+      es: ['Formularios llenados y creados', 'Firma a mano y firma digital (PAdES)', 'Páginas giradas, movidas y unidas', 'Texto reconocido, PDF/A y contraseñas'],
+      en: ['Forms filled and made', 'Handwritten and digital signatures (PAdES)', 'Pages turned, moved and joined', 'Text recognized, PDF/A and passwords'],
+    },
+    formats: 'PDF',
+    npm: { name: '@rebopdf/react', version: '0.2.0' },
+    repo: 'https://github.com/JFranciscoRobles/rebopdf',
+    snippet: {
+      lang: 'tsx',
+      code: `import { PdfEditor, usePdf } from '@rebopdf/react';
+
+const { pdf } = usePdf('/contract.pdf');
+
+<PdfEditor
+  pdf={pdf}
+  onSave={(bytes) => upload(bytes)}
 />`,
     },
   },
