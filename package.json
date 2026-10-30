@@ -23,7 +23,7 @@
     "@rebofiles/core": "0.13.0",
     "@rebofiles/react": "0.13.0",
     "@rebomail/react": "0.1.0",
-    "@rebonotes/react": "0.1.0",
+    "@rebonotes/react": "0.1.1",
     "@rebosheets/core": "0.1.0",
     "@rebosheets/react": "0.1.0",
     "@rebosheets/viewer": "0.1.0",

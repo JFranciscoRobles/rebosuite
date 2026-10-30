@@ -202,7 +202,7 @@ import { MailEditor } from '@rebomail/react';
       en: ['A tree of pages and links', 'Real Markdown, as a zip too', 'Documents, sheets and decks in the page', 'Tools for AI assistants'],
     },
     formats: 'Markdown',
-    npm: { name: '@rebonotes/react', version: '0.1.0' },
+    npm: { name: '@rebonotes/react', version: '0.1.1' },
     repo: 'https://github.com/JFranciscoRobles/rebonotes',
     snippet: {
       lang: 'tsx',
