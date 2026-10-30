@@ -36,8 +36,6 @@ export const COPY = {
       loading: 'Cargando {app}…',
       reset: 'Empezar de nuevo',
       local: 'Todo ocurre en tu navegador. Al recargar, cada demo vuelve a empezar.',
-      soon: 'ReboNotes llega pronto',
-      soonText: 'Su demo estará aquí en cuanto esté en npm.',
       failed: 'Esta demo no pudo abrirse en este navegador.',
     },
     together: {
@@ -121,8 +119,6 @@ export const COPY = {
       loading: 'Loading {app}…',
       reset: 'Start over',
       local: 'It all happens in your browser. Reload, and each demo starts again.',
-      soon: 'ReboNotes is coming',
-      soonText: 'Its demo will be here as soon as it is on npm.',
       failed: 'This demo could not open in this browser.',
     },
     together: {

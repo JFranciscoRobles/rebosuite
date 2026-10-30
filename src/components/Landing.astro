@@ -49,7 +49,7 @@ const ICONS: Record<string, string> = {
   </div>
 </header>
 
-<main id="main">
+<main id="main" aria-label="Rebo Suite">
   <!-- Hero -->
   <section class="hero">
     <div class="wrap hero-inner">
@@ -165,7 +165,7 @@ const ICONS: Record<string, string> = {
         <p>{t.demo.lead}</p>
       </div>
       <div data-reveal>
-        <Demos client:only="react" lang={lang} apps={PRODUCTS.map((p) => ({ id: p.id, name: p.name, kind: p.kind[lang], style: colours(p) }))} texts={t.demo} />
+        <Demos client:only="react" lang={lang} apps={PRODUCTS.filter((p) => p.npm).map((p) => ({ id: p.id, name: p.name, kind: p.kind[lang], style: colours(p) }))} texts={t.demo} />
       </div>
     </div>
   </section>

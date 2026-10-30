@@ -10,6 +10,7 @@ const DEMOS: Record<string, ComponentType<DemoProps>> = {
   rebosheets: lazy(() => import('./SheetsDemo')),
   rebofiles: lazy(() => import('./FilesDemo')),
   rebomail: lazy(() => import('./MailDemo')),
+  rebonotes: lazy(() => import('./NotesDemo')),
 };
 
 const TEXTS = {

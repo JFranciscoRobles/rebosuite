@@ -1,11 +1,9 @@
 // One demo of each app, to use right here. Each is a frame of its own page
 // (/demos/<app>/), so the styles and keys of one app never reach another;
 // it is loaded only once its tab is chosen and the section is in view, and
-// those opened stay as they were. ReboNotes, not on npm yet, says so.
+// those opened stay as they were. Every app given is on npm, with its page.
 
 import { useEffect, useRef, useState } from 'react';
-
-const DEMOS = new Set(['rebodocs', 'reboslides', 'rebosheets', 'rebofiles', 'rebomail']);
 
 export interface DemoApp {
   id: string;
@@ -17,7 +15,7 @@ export interface DemoApp {
 interface Props {
   lang: 'es' | 'en';
   apps: DemoApp[];
-  texts: { tablist: string; loading: string; reset: string; local: string; soon: string; soonText: string; failed: string };
+  texts: { tablist: string; loading: string; reset: string; local: string; failed: string };
 }
 
 /** The colours of an app, as the page gives them in a `style` attribute. */
@@ -46,7 +44,7 @@ export default function Demos({ lang, apps, texts }: Props) {
     const at = (index + apps.length) % apps.length;
     const app = apps[at];
     setCurrent(app.id);
-    if (DEMOS.has(app.id)) setOpened((ids) => (ids.includes(app.id) ? ids : [...ids, app.id]));
+    setOpened((ids) => (ids.includes(app.id) ? ids : [...ids, app.id]));
     if (focus) tabs.current[at]?.focus();
   };
   const restart = () => {
@@ -54,7 +52,6 @@ export default function Demos({ lang, apps, texts }: Props) {
     setRuns((all) => ({ ...all, [current]: (all[current] ?? 0) + 1 }));
   };
   const app = apps.find((a) => a.id === current)!;
-  const live = DEMOS.has(current);
 
   return (
     <div className="demo" ref={root}>
@@ -87,14 +84,12 @@ export default function Demos({ lang, apps, texts }: Props) {
             </button>
           ))}
         </div>
-        {live && (
-          <button type="button" className="demo-reset" onClick={restart}>
-            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-              <path d="M2.5 8a5.5 5.5 0 1 0 1.7-4M2.5 2.5v3h3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {texts.reset}
-          </button>
-        )}
+        <button type="button" className="demo-reset" onClick={restart}>
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+            <path d="M2.5 8a5.5 5.5 0 1 0 1.7-4M2.5 2.5v3h3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          {texts.reset}
+        </button>
       </div>
 
       <div className="demo-frame" role="tabpanel" id="demo-panel" aria-labelledby={`demo-tab-${current}`} data-product="" style={styleOf(app.style)}>
@@ -114,17 +109,10 @@ export default function Demos({ lang, apps, texts }: Props) {
               />
             );
           })}
-        {live && !loaded[current] && (
+        {!loaded[current] && (
           <div className="demo-state">
             <img className="demo-pulse" src={`/logos/${app.id}.svg`} alt="" width={48} height={48} />
             {texts.loading.replace('{app}', app.name)}
-          </div>
-        )}
-        {!live && (
-          <div className="demo-state">
-            <img src={`/logos/${app.id}.svg`} alt="" width={56} height={56} />
-            <strong>{texts.soon}</strong>
-            <span>{texts.soonText}</span>
           </div>
         )}
       </div>

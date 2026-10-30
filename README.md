@@ -24,4 +24,4 @@ npm run preview
 | `public/logos/` | Each app's logo, as in its own repository. |
 
 When an app publishes a new version, change its `npm.version` in
-`src/data/products.ts`, and its package in `package.json`; when ReboNotes reaches npm, give it `npm` and `repo`, and add its demo to `DEMOS` in `src/demos/Demos.tsx`.
+`src/data/products.ts`, and its package in `package.json`. Every app with `npm` has a demo: its component in `src/demos/`, named in `DEMOS` of `src/demos/DemoPage.tsx`.

@@ -78,7 +78,7 @@ export const PRODUCTS: Product[] = [
       en: ['Alignment guides, groups and layers', 'Themes and templates', 'Full-screen presenting', 'Vector PDF, PNG and PPTX'],
     },
     formats: 'PPTX · PDF · PNG',
-    npm: { name: '@reboslides/react', version: '0.6.0' },
+    npm: { name: '@reboslides/react', version: '0.7.0' },
     repo: 'https://github.com/JFranciscoRobles/reboslides',
     snippet: {
       lang: 'tsx',
@@ -202,14 +202,13 @@ import { MailEditor } from '@rebomail/react';
       en: ['A tree of pages and links', 'Real Markdown, as a zip too', 'Documents, sheets and decks in the page', 'Tools for AI assistants'],
     },
     formats: 'Markdown',
+    npm: { name: '@rebonotes/react', version: '0.1.0' },
+    repo: 'https://github.com/JFranciscoRobles/rebonotes',
     snippet: {
-      lang: 'ts',
-      code: `import { mountNotes } from '@rebonotes/editor';
+      lang: 'tsx',
+      code: `import { NotesEditor } from '@rebonotes/react';
 
-mountNotes(element, {
-  workspace,
-  onChange: (workspace) => save(workspace),
-});`,
+<NotesEditor workspace={workspace} onChange={save} />`,
     },
   },
 ];
